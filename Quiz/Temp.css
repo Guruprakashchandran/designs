@@ -1,0 +1,80 @@
+@charset "ISO-8859-1";
+
+.alignment{
+
+	margin-left: 80px;
+}
+.input{
+
+	size: 20px;
+	border-block-style: solid;
+	border-radius: 10%;
+	width: 60px;
+	height: 30px;
+	margin-left: 600px;
+}
+.buttontype{
+
+	text-align: center;
+	margin-right: 45px;
+	margin-left: auto;
+	border-radius: 45px;
+	height: 40px;
+	width: 80px;
+	size: 40px;
+	border-color: white;
+	font-weight: bold;
+	font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+	font-size: 20px ;
+}
+.buttontype:hover{
+	color: white;
+	background-color: black;
+	/* <font color: white; */
+	/* font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; */
+}
+.ques{
+
+	font-size: 30px;
+	font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+	text-align: center;
+}
+.container{
+	
+	box-shadow: 5px 5px 5px black;
+	/* text-align: center; */
+	text-align: left;
+	border-style: double;
+	border-color: black;
+	/* background-color: rgb(4, 199, 212); */
+	padding: 30px;
+	margin-top:  30px;
+	margin-left: 200px;
+	margin-right: 200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: larger;
+	font-style: italic;
+}
+.emptyspace{
+
+	width: 100%;
+	display: flex;
+}
+.questiondiv{
+	
+	box-shadow: 5px 5px 5px black;
+	padding: 200px;
+	text-align: center;
+	border-style: double;
+	border-color: black;
+	margin-right: 200px;
+	/* background-color: rgb(168, 168, 168); */
+	/* background-color: rgb(4, 199, 212); */
+	padding: 30px;
+	margin-top:  30px;
+	margin-left: 200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 35px;
+	/* font-style: oblique; */
+	font-style: italic;
+}
