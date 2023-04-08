@@ -147,7 +147,6 @@ function messages(groupmessages) {
         for (let j = 0; j < msgArr.length; j++) {
         
             let msgObj = msgArr[j];
-            console.log(msgObj);
             let userdetailArr = msgObj["userdetail"];
             let groupdetail = msgObj["group"];
             // console.log(userdetailArr.length);
@@ -167,24 +166,21 @@ function showGroupMessages(i){
         let messages = "";
         messages += '<div class = "messageHeader">'
         messages += `<span class = "chatNameStyle">${groupnames[i]}</span>`
+        messages += '</div>'
         messages += '<div class = "messages">'
         messages += '<div class = "messagesAdjustment">'
         let msgArr = groupmessages[i];
         console.log(msgArr);
+        console.log(i);
         for (let j = 0; j < msgArr.length; j++) {
         
             let msgObj = msgArr[j];
 
             let userdetail = msgObj["userdetail"];
             let groupdetail = msgObj["group"];
-            // console.log(userdetail.length);
             if(userdetail != null){
 
                 for (let k = 0; k < userdetail.length; k++) {
-                    console.log(userdetail[k].message);
-                    // let userdetail = userdetailArr[k];
-                    // let msg = userdetail.message;
-                    // if(userdetail.name == user.name){
     
                         messages += `<div class = "yourChat"><p class = "yourMessage">${userdetail[k].message}</p></div>`;            
                     }
