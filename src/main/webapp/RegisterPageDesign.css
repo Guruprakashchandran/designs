@@ -1,0 +1,242 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    /* background-color: rgb(192, 191, 191); */
+    /* background-color: #B666D2; */
+    /* background-image: linear-gradient(325deg, rgb(223, 222, 222) 0%, #FFFFFF 100%); */
+}
+.inputBoxAdjustment{
+
+    margin-top: 30px;
+    background-color: white;
+    padding-left: 10px;
+    /* width: 30px; */
+}
+.Appname{
+
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 30px;
+}
+.signinStyle{
+
+    margin-top: 25px;
+    font-family:"Popins",sans-serif;
+    color: grey;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: bold;
+    background-color: white;
+}
+/* .InputStyles:focus{
+
+    padding-left: 10px;
+} */
+.mobilePngStyle{
+
+    background-color: white;
+    width: 20px;
+    height: auto;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* input[type="number"] {
+  overflow: hidden;
+} */
+.mobileSpanStyle{
+
+ background-color: white;
+ position: relative;
+ margin-right: 10px;
+ bottom: -2px;   
+}
+.InputStyles:focus{
+
+    border-bottom: 2px solid black;
+}
+.InputStyles{
+
+    padding-left: 10px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid gray;
+    text-align: 20px;
+    outline: none;
+    margin-top: 20px;
+    height: 30px;
+    width: 250px;
+    border-radius: 3px;
+    font-family:"Popins",sans-serif;
+    font-size: 15px;
+    background-color: white;
+    /* border-color: black; */
+    /* box-shadow: 0 0 5px rgb(3, 3, 3); */
+}.submitButtonStyle{
+
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    border:2px solid black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    transition: 0.5s all ease-in-out;
+}
+.submitButtonStyle:hover{
+
+    background-image: linear-gradient(#ad1deb,#6e72fc);
+    /* background-image: linear-gradient(#5f0a87,#a4508b); */
+    border:none;
+    color: white;
+}
+.signUpStyles:hover{
+
+    text-decoration: underline;
+}
+.signUpStyles{
+
+    background-color: white;
+    color: darkblue;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+}
+.signUpdivStyle{
+
+    /* margin-left: 20px; */
+    background-color: white;
+}
+signUpStyles:hover{
+
+    color: blue;
+}
+.ButtonAdjustment{
+
+    /* display: inline-block; */
+    margin-top: 50px;
+    /* margin-left: 130px; */
+    height: 40px;
+    width: 100%;
+    border-radius: 3px;
+    /* border-color: black; */
+    /* box-shadow: 0 0 5px rgb(3, 3, 3); */
+}
+.lockicon{
+
+    color: black;
+    font-size: 17px;
+    color: #757575;
+    /* width: 20px; */
+    /* height: 20px; */
+}
+.phoneicon{
+
+    color: black;
+    font-size: 17px;
+    color: #757575;
+    transform:rotate(100deg);
+    /* width: 20px; */
+    /* height: 20px; */
+}
+.LoginPageModel p{
+
+    margin: 10px 0;
+    font-weight: bold;
+    font-family:sans-serif;
+}
+.setAppImage{
+    margin-top: 10px;
+    background-color: white;
+    width: 60px;
+    height: 65px;
+}
+.RegisterDivContainer{
+
+    background-color: white;
+    display: inline-block;
+    border-radius: 5%;
+    height: auto;
+    width: 400px;
+    /* padding: 40px; */
+    margin: auto;
+    margin-top: 110px;
+    margin-bottom: 100px;
+    text-align: center;
+    /* box-shadow: rgb(209, 206, 206) 2px 2px 4px; */
+    /* box-shadow: 0 0 20px black;rgb(209, 206, 206); */
+}
+.RegisterContainer1{
+    
+}
+.RegisterContainer2{
+
+    display: none;
+}
+.checkBoxNext:checked ~ .RegisterContainer2{
+
+    display: block;
+}
+.checkBoxNext:checked ~ .RegisterContainer1{
+
+    display: none;
+}
+.checkBoxDivNext{
+
+}
+.checkBoxNext{
+
+    visibility: hidden;
+}
+.button_Container{
+
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+}
+.leftarrow{
+
+    /* background-color: brown; */
+    display: none;
+}
+
+.labelContainer{
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    min-width: 100px;
+    font-weight: bold;
+}
+.labelContainer:hover{
+
+    color : brown
+}
+.submitButtonStyle{
+    display: none;
+    font-size: 15px;
+}
+ .BackgroundContainer{
+
+    /* background-color: #B666D2; */
+    display: flex;
+    height: 100vh;
+    background-image: linear-gradient(#b621fe, #1fd1f2);
+    /* background-color: white; */
+    /* background-color: white; */
+    /* background-color: rgb(192, 191, 191); */
+    /* height: auto; */
+    /* width: auto; */
+} 

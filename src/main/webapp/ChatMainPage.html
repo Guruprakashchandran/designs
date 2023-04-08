@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="ChatMainPage.css">
+    
+    <title>Chat Application</title>
+</head>
+<body onload="personalchatclick()">
+   <div class = "BackgroundContainer">
+    <div class="">
+        <header class = "headerContainer">
+            <div class = "Appname"><span class = "AppNameStyle">CHAT APP</span></div>
+            <!-- <div class = "headerEmptySpace"></div> -->
+            <div class = "Profile"><img onclick = "showProfile()" class = "profileImage" src = "./Images/user (3).png"></div>
+        </header>
+    </div>
+    <div class = "bodyContainer">
+        <div class = "chatCategory">
+            <div onclick = "personalchatclick()" class = "privateChat"><span><i class="fa fa-user usericon"></i></span></div>
+            <div onclick = "groupchatclick()" class = "groupChat"><span><i class="fa fa-users usersicon"></i></span></div>
+        </div>
+        <div class = "chatList" id = "chatLists">
+
+             <div class = "contact"></div>
+                <!-- <span class = "nameContainer">Name</span> 
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div>
+            <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div> -->
+            <!-- <div class = "contact">
+                <span class = "nameContainer">Name</span>
+            </div> -->
+        </div>
+        <div class = "messagesList">
+            <img class = "BackgroundImage" src="./Images/images-removebg-preview.png" alt = "wrong">
+        </div>
+    </div>
+   </div>
+   <script src="https://kit.fontawesome.com/de2421ab51.js" crossorigin="anonymous"></script>
+   <script src="ChatMainPage.js"></script>
+</body>
+</html>
