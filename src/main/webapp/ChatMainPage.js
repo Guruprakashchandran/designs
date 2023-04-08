@@ -170,11 +170,12 @@ function showGroupMessages(i){
         messages += '<div class = "messages">'
         messages += '<div class = "messagesAdjustment">'
         let msgArr = groupmessages[i];
-        console.log(msgArr);
-        console.log(i);
-        for (let j = 0; j < msgArr.length; j++) {
+        // console.log(groupmessages);
+        // console.log(msgArr);
+        // console.log(i);
+        // for (let j = 0; j < msgArr.length; j++) {
         
-            let msgObj = msgArr[j];
+            let msgObj = msgArr[i];
 
             let userdetail = msgObj["userdetail"];
             let groupdetail = msgObj["group"];
@@ -192,7 +193,7 @@ function showGroupMessages(i){
                     messages += `<div class = "friendChat"><p class = "friendMessage">${groupdetail[k].message}</p></div>`;            
                }
             }
-        }
+        // }
         // }
         // messages += '<div class = "friendChat"><p class = "friendMessage">guru<br>guru<br>guru<br>guru<br></p></div>';
         // messages += '<div class = "yourChat"><p class = "yourMessage">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, molestiae! Eveniet alias, blanditiis laboriosam quasi quis harum recusandae! Aut labore voluptatum autem rerum. Iste sapiente quisquam maiores quam, aut voluptatibus nisi minima. Aut amet pariatur inventore ex, natus est nisi consectetur voluptatem consequuntur porro modi, optio mollitia quas accusamus recusandae?</p></div>'
@@ -200,7 +201,7 @@ function showGroupMessages(i){
         messages += '</div>'
         messages += '</div>'
         messages += '<div class = "searchBar">'
-        messages += '<input type = "text" class = "searchBarStyle" placeholder = "Enter Message">'
+        messages += `<input type = "text" class = "searchBarStyle" id = "messagebox" onclick = "getMessages(${i})" placeholder = "Enter Message">`
         messages += '</div>'
         document.querySelector(".messagesList").innerHTML = messages;
     //     let xhr = new XMLHttpRequest();
@@ -213,4 +214,29 @@ function showGroupMessages(i){
     //     xhr.open("POST","http://localhost:8086/ChatApp/messages",true);
     //     xhr.send();
     // }
+}
+
+function getMessages(i) {
+
+    let msg = document.getElementById("messagebox");
+    msg.addEventListener("keyup",function(event){
+
+        if(event.keyCode === 13){
+
+            let text = msg.value;
+            if(text.length != 0){
+
+                document.getElementById("messagebox").value = "";
+                // console.log(text);
+                addMessage(text);
+                // text = "";
+            }
+        }
+    });
+}
+
+
+function addMessage(msg,i){
+
+    
 }

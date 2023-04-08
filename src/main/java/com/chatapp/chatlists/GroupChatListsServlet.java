@@ -81,16 +81,22 @@ public class GroupChatListsServlet extends HttpServlet{
 					for(Entry<String, List<Messages>> entry : data.get(i).get(j).entrySet()) {
 						
 						JSONArray arr = new JSONArray();
+//						System.out.println("start---");
 						for(int l = 0;l<entry.getValue().size();++l) {
 							
 							JSONObject details = new JSONObject();
+							
+//							System.out.println(entry.getValue().toString());
+//							System.out.println();
 							details.put("message", entry.getValue().get(l).getMessage());
 							details.put("status", entry.getValue().get(l).getStatus());
 							details.put("personId", entry.getValue().get(l).getPersonId());
 							details.put("mobileno", entry.getValue().get(l).getMobileNo());
 							details.put("date", entry.getValue().get(l).getDate());
 							details.put("name", entry.getValue().get(l).getName());
+							
 							arr.add(details);
+//							System.out.println(details);
 							//	System.out.println(entry.getValue().get(l).getMessage());
 						}
 						if(arr.size()!=0) {
@@ -103,7 +109,7 @@ public class GroupChatListsServlet extends HttpServlet{
 				}
 				jsonArray.add(jsonArr);
 			}
-			System.out.println(jsonArray.toJSONString());
+//			System.out.println(jsonArray.toJSONString());
 			obj.put("messages", jsonArray);
 			out.print(obj);
 		}
