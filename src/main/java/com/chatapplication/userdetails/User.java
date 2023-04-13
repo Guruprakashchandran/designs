@@ -9,10 +9,13 @@ public class User {
 	private String dateOfBirth;
 	private String password;
 	private String about;
+	private String id;
 	
 	public User(String name, String mobileNo, String emailId, int age, String dateOfBirth, String password,
-			String about) {
+			String about,String id) {
 		super();
+		this.id = id;
+		this.emailId = id;
 		this.name = name;
 		this.mobileNo = mobileNo;
 		this.emailId = emailId;
@@ -26,6 +29,12 @@ public class User {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	public String getMobileNo() {
 		return mobileNo;

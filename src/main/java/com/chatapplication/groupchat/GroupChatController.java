@@ -15,9 +15,9 @@ public class GroupChatController implements GroupChatModelToControllerCall{
 	private GroupChatControllerToViewCall groupChatControllerToViewCall;
 	private GroupChatListsServlet groupChatLists;
 	private GroupChatControllerToModelCall groupChatControllerToModelCall;
-	public GroupChatController() {
+	public GroupChatController(GroupChatListsServlet groupChatListsServlet) {
 		
-		groupChatLists = new GroupChatListsServlet();
+		groupChatLists = groupChatListsServlet;
 //		groupChatControllerToViewCall = groupChatView;
 		groupChatControllerToModelCall = new GroupChatModel(this);
 	}
@@ -35,11 +35,11 @@ public class GroupChatController implements GroupChatModelToControllerCall{
 //		
 //		groupChatControllerToModelCall.setMessagesViewed(status,loginerId);
 //	}
-//	@Override
-//	public void addMessage(User user, String id, String msg, String groupId, String status) {
-//		
-//		groupChatControllerToModelCall.addMessage(user,id,msg,groupId,status);
-//	}
+	
+	public void addMessage(User user, String id, String msg, String groupId, String status) {
+		
+		groupChatControllerToModelCall.addMessage(user,id,msg,groupId,status);
+	}
 //	@Override
 //	public Map<String,String> getFriendsList(User user) {
 //		

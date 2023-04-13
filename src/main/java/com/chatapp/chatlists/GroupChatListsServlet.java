@@ -19,7 +19,7 @@ import com.chatapplication.groupchat.GroupChatController;
 import com.chatapplication.groupchatlist.Messages;
 import com.chatapplication.userdetails.User;
 
-public class GroupChatListsServlet extends HttpServlet{
+public class GroupChatListsServlet extends HttpServlet {
 
 	/**
 	 * 
@@ -28,31 +28,30 @@ public class GroupChatListsServlet extends HttpServlet{
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-	
-		if(req.getServletPath().equals("/groupchatlist")) {
-			
+
+		GroupChatController groupChatController = new GroupChatController(this);
+		if (req.getServletPath().equals("/groupchatlist")) {
+
 			HttpSession ses = req.getSession();
-			User user = (User)ses.getAttribute("user");
+			User user = (User) ses.getAttribute("user");
 //			System.out.println(user.getMobileNo());
-			new GroupChatController().getGroupChatDetails(user,req,res);
-		}
-		else if(req.getServletPath().equals("/messages")) {
-			
-			PrintWriter out = null;
+			groupChatController.getGroupChatDetails(user, req, res);
+		} else if (req.getServletPath().equals("/messages")) {
+
 			try {
-				
-				res.setContentType("text/plain");
-//				System.out.println("output");
-				out = res.getWriter();
-				out.write("messages");
-			}
-			catch(Exception e) {
-				
+
+				String groupId = req.getParameter("groupId");
+				String msg = req.getParameter("message");
+				System.out.println(groupId+" "+msg);
+				HttpSession ses = req.getSession();
+				User user = (User) ses.getAttribute("user");
+				groupChatController.addMessage(user, user.getId(), msg, groupId, "NotViewed");
+			} catch (Exception e) {
+
 				System.out.println("Didn't Reached!!!");
-			}
-			finally {
-				
-				out.close();
+			} finally {
+
+//				out.close();
 			}
 		}
 	}
@@ -60,10 +59,10 @@ public class GroupChatListsServlet extends HttpServlet{
 	public void showDetails(List<List<Map<String, List<Messages>>>> data, User user, List<String> groupNames,
 			int[] friendsCount, List<List<Integer>> groupMembersCount, HttpServletRequest req,
 			HttpServletResponse res) {
-		
+
 		PrintWriter out = null;
 		try {
-			
+
 			out = res.getWriter();
 			res.setContentType("application/json");
 			JSONObject obj = new JSONObject();
@@ -71,37 +70,49 @@ public class GroupChatListsServlet extends HttpServlet{
 //			System.out.println(obj1.put("guru",data).toString());
 			obj.put("groupNames", groupNames);
 			JSONArray jsonArray = new JSONArray();
-			for(int i = 0;i<data.size();++i) {
-				
+			JSONArray groupIds = new JSONArray();
+			String userId = "";
+			for (int i = 0; i < data.size(); ++i) {
+
 				JSONArray jsonArr = new JSONArray();
-				for(int j = 0;j<data.get(i).size();++j) {
-					
+				for (int j = 0; j < data.get(i).size(); ++j) {
+
 					JSONObject jsonObject = new JSONObject();
 					int k = 0;
-					for(Entry<String, List<Messages>> entry : data.get(i).get(j).entrySet()) {
-						
+					for (Entry<String, List<Messages>> entry : data.get(i).get(j).entrySet()) {
+
 						JSONArray arr = new JSONArray();
 //						System.out.println("start---");
-						for(int l = 0;l<entry.getValue().size();++l) {
-							
+						if (entry.getKey().startsWith("gc")) {
+
+							if (!groupIds.contains(entry.getKey())) {
+
+								groupIds.add(entry.getKey());
+							}
+						} else {
+
+							userId = entry.getKey();
+						}
+						for (int l = 0; l < entry.getValue().size(); ++l) {
+
 							JSONObject details = new JSONObject();
-							
+
 //							System.out.println(entry.getValue().toString());
 //							System.out.println();
 							details.put("message", entry.getValue().get(l).getMessage());
 							details.put("status", entry.getValue().get(l).getStatus());
 							details.put("personId", entry.getValue().get(l).getPersonId());
 							details.put("mobileno", entry.getValue().get(l).getMobileNo());
-							details.put("date", entry.getValue().get(l).getDate());
+							details.put("date", entry.getValue().get(l).getDate().substring(0,19).toString());
 							details.put("name", entry.getValue().get(l).getName());
-							
+
 							arr.add(details);
 //							System.out.println(details);
-							//	System.out.println(entry.getValue().get(l).getMessage());
+							// System.out.println(entry.getValue().get(l).getMessage());
 						}
-						if(arr.size()!=0) {
-						
-							jsonObject.put((k== 0 ? "userdetail": "group"),arr);
+						if (arr.size() != 0) {
+
+							jsonObject.put((k == 0 ? "userdetail" : "group"), arr);
 						}
 						k++;
 					}
@@ -110,15 +121,16 @@ public class GroupChatListsServlet extends HttpServlet{
 				jsonArray.add(jsonArr);
 			}
 //			System.out.println(jsonArray.toJSONString());
+//			System.out.println(groupIds.toJSONString());
 			obj.put("messages", jsonArray);
+			obj.put("groupIds", groupIds);
+			obj.put("userId", userId);
 			out.print(obj);
-		}
-		catch(Exception e) {
-	
+		} catch (Exception e) {
+
 			System.out.println("Response Didn't send to Client!!!");
-		}
-		finally {
-			
+		} finally {
+
 			out.close();
 		}
 	}

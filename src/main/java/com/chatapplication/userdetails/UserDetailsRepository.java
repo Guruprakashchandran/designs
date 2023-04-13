@@ -148,7 +148,7 @@ public class UserDetailsRepository {
 
 					userDetails = new User(result.getString("name"), result.getString("mobileno"),
 							result.getString("emailid"), result.getInt("age"), result.getString("dateofbirth"),
-							result.getString("password"), result.getString("about"));
+							result.getString("password"), result.getString("about"),result.getString("id"));
 					return userDetails;
 
 				}

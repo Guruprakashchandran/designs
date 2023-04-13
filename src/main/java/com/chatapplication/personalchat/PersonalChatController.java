@@ -15,10 +15,10 @@ public class PersonalChatController implements PersonalChatModelToControllerCall
 //	private PersonalChatControllerToViewCall personalChatControllerToViewCall;
 	private PersonalChatControllerToModelCall personalChatControllerToModelCall;
 	private PrivateChatListServlet privateChatListServlet;
-	public PersonalChatController() {
+	public PersonalChatController(PrivateChatListServlet privateChatListServlet) {
 		
 //		personalChatControllerToViewCall = personalChatView;
-		privateChatListServlet = new PrivateChatListServlet();
+		this.privateChatListServlet = privateChatListServlet;
 		personalChatControllerToModelCall = new PersonalChatModel(this);
 	}
 //	@Override
@@ -58,10 +58,10 @@ public class PersonalChatController implements PersonalChatModelToControllerCall
 		privateChatListServlet.showContacts(data,user,friendsName,totalRegisterCount,req,res);
 	}
 //	@Override
-//	public void addMessage(User user, String personId, String msg,String loginerId,String status) {
-//		
-//		personalChatControllerToModelCall.addMessage(user,personId,msg,loginerId,status);
-//	}
+	public void addMessage(User user, String personId, String msg,String loginerId,String status) {
+		
+		personalChatControllerToModelCall.addMessage(user,personId,msg,loginerId,status);
+	}
 //	@Override
 //	public void msgAddedFailed(String mobileNo) {
 //		

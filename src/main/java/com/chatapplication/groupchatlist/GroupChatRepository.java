@@ -472,7 +472,7 @@ public class GroupChatRepository {
 			prepareStatement.setString(3, id);
 			prepareStatement.setString(4, "Not Viewed");
 			prepareStatement.executeUpdate();
-
+			System.out.println("success");
 		} catch (Exception e) {
 
 			e.printStackTrace();
