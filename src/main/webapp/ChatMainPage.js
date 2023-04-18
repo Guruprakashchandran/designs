@@ -10,10 +10,12 @@ var privatemessages = [];
 var privatechatclick;
 var isPrivateChatFirstEntry = true,
   isGroupChatFirstEntry = true;
+var friendsList = [];
 var personalmsg = true;
 
 function messagesList() {
   document.querySelector(".profileViewDiv").style = "display: none";
+  document.querySelector(".CenterDiv").style = "display : none";
 }
 
 function friendMessage() {
@@ -42,7 +44,6 @@ function personalchatclick() {
   document.querySelector(".usericon").style = "color : #3e4e53";
   if (isPrivateChatFirstEntry == true) {
     isPrivateChatFirstEntry = false;
-    console.log("reached");
     let xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
       if (xhr.readyState == 4 && this.status == 200) {
@@ -71,7 +72,6 @@ function personalchatclick() {
 }
 
 function setProfileDetails() {
-  console.log(user.name);
   document.querySelector(".userspan").innerHTML = user.name;
   document.querySelector(".mobilespan").innerHTML = user.mobileno;
   document.querySelector(".emailspan").innerHTML = user.emailid;
@@ -107,7 +107,6 @@ function displayPersonalChatList(content) {
 function filterFriends() {
   document.querySelector(".profileViewDiv").style = "display: none";
   let searchFriend = document.getElementById("searchFriend");
-  console.log(searchFriend.value);
   searchFriend.addEventListener("keyup", function (event) {
     // friendIndexs = [];
     let filterFriendsnames = names.filter((name) =>
@@ -130,10 +129,8 @@ function filterFriends() {
 
 function displayFilterFriendsList(filterFriendsnames, FriendIndexes) {
   let content = "";
-  console.log(filterFriendsnames.length);
   if (filterFriendsnames.length > 0) {
     for (let index = 0; index < filterFriendsnames.length; ++index) {
-      console.log(index);
       content += `<div class = "contact" onclick = "showPersonalMessages(${FriendIndexes[index]})"><span class = "nameContainer">${filterFriendsnames[index]}</span></div>`;
     }
   } else {
@@ -243,7 +240,6 @@ function addMessagesinPersonalChat(msg, i) {
       // showgroupnames = false;
       personalmsg = false;
       personalchatclick();
-      console.log(privatemessages);
       // (privatechatclickid);
       personalchatclick(privatechatclickid);
     }
@@ -313,8 +309,6 @@ function displayGroupChatList(content) {
   }
 }
 
-function addGroup() {}
-
 function filterGroups() {
   document.querySelector(".profileViewDiv").style = "display: none";
   let searchGroup = document.getElementById("searchGroup");
@@ -339,10 +333,8 @@ function filterGroups() {
 
 function displayFilterGroupList(filtergroupnames, groupIndexes) {
   let content = "";
-  console.log(filtergroupnames.length);
   if (filtergroupnames.length > 0) {
     for (let index = 0; index < filtergroupnames.length; ++index) {
-      console.log(index);
       content += `<div class = "contact" onclick = "showGroupMessages(${groupIndexes[index]})"><span class = "nameContainer">${filtergroupnames[index]}</span></div>`;
     }
   } else {
@@ -385,8 +377,7 @@ function showGroupMessages(i) {
   groupChatclickid = i;
   let person1msg = 0,
     person2msg = 0;
-  console.log(userdetail);
-  console.log(groupdetail);
+  S;
   let displayed = true;
   while (
     userdetail != null &&
@@ -499,7 +490,7 @@ function addMessage(msg, i) {
 }
 
 function addFriend() {
-  document.getElementById("centerContentDiv").appendChild =
+  document.getElementById("centerContentDiv").innerHTML =
     '<div class="friendMobileNoDiv"><label class="friendNolabel" for="friendno">Friend Mobile No : </label><input type="number" id="friendno" class="friendno" maxlength="10" required/></div><div class="addFriendButtonDiv"><input type="submit" class="addFriendButton" onclick="addFriendInYourFriendList()" value="ADD"/></div>';
   document.getElementById("centerContentDiv").style = "display:block";
 }
@@ -507,7 +498,100 @@ function addFriendInYourFriendList() {
   let friendMobileNumber = document.getElementById("friendno").value;
   if (friendMobileNumber.length == 10) {
     document.getElementById("centerContentDiv").style = "display:none";
+    if (user.mobileno != friendMobileNumber) {
+      addFriendForAjaxCall(friendMobileNumber);
+    } else {
+      alert("Its Your Number");
+    }
   } else {
     alert("Wrong Mobile Number!!!");
   }
+}
+
+function addFriendForAjaxCall(friendMobileNumber) {
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && this.status == 200) {
+      let response = this.responseText;
+      if (response == "Added") {
+        // console.log(response);
+        isPrivateChatFirstEntry = true;
+        personalmsg = true;
+        personalchatclick();
+      } else {
+        alert(response);
+      }
+    }
+  };
+  xhr.open("post", "http://localhost:8085/ChatApp/addFriend", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("friendNo=" + friendMobileNumber);
+}
+
+function addGroup() {
+  let content =
+    '<div class="friendMobileNoDiv"><label class="friendNolabel" for="friendno">Group Name : </label><input type="text" id="groupName" class="friendno" maxlength="10"/></div><div class="addFriendButtonDiv"><input type="submit" class="addFriendButton" onclick="createGroup()" value="Create"/></div>';
+  document.getElementById("centerContentDiv").innerHTML = content;
+  document.getElementById("centerContentDiv").style = "display:block;";
+}
+var groupname;
+function createGroup() {
+  groupname = document.getElementById("groupName").value;
+  if (groupname.length != null) {
+    showFriends();
+    // document.getElementById("centerContentDiv").style = "display:none;";
+  } else {
+    alert("Plss!! Enter Group Name");
+  }
+}
+function showFriends() {
+  let friends = "";
+  if (names != null) {
+    friendIds = [];
+    friends += '<div class="friendId">Friends</div>';
+    friends += "<div class = friendsListbackgroundDiv>";
+    for (let i = 0; i < names.length; ++i) {
+      friends += `<div class="friend" id = "${i}"onclick = "friendIdClick(${i})">${names[i]}</div>`;
+    }
+    friends += "</div>";
+    friends +=
+      '<div class="friendsAddButtonDiv"><input type="submit" value="add" onclick = "addFriendsToGroup()" class="friendsAddButton" /></div>';
+    document.getElementById("centerContentDiv").innerHTML = friends;
+  } else {
+    document.getElementById("centerContentDiv").innerHTML =
+      '<div class = "noFriend">No Friends</div>';
+  }
+}
+
+var friendIds = [];
+function friendIdClick(i) {
+  if (!friendIds.includes(i)) {
+    friendIds.push(i);
+    document.getElementById(`${i}`).style = "background-color : lightblue";
+  } else {
+    friendIds.pop(friendIds.lastIndexOf(i));
+    document.getElementById(`${i}`).style = "background-color : white";
+  }
+}
+
+function addFriendsToGroup() {
+  let friendIdList = JSON.stringify(friendIds);
+  let friendsNames = JSON.stringify(names);
+  console.log(friendIds);
+  let xhr = new XMLHttpRequest();
+  // xhr.onreadystatechange = function () {
+  //   if (xhr.readyState == 4 && this.response == 200) {
+  //     // console.lo
+  //   }
+  // };
+  xhr.open("post", "", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send(
+    "groupName=" +
+      groupname +
+      "&friendslist=" +
+      encodeURIComponent(friendIdList) +
+      "&friendsIds" +
+      encodeURIComponent(friendsNames)
+  );
 }

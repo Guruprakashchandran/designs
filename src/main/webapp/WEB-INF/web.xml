@@ -22,7 +22,11 @@
   <servlet-name>personalchat</servlet-name>
   <url-pattern>/message</url-pattern>
   </servlet-mapping>
-  
+  <servlet-mapping>
+  <servlet-name>personalchat</servlet-name>
+  <url-pattern>/addFriend</url-pattern>
+  </servlet-mapping>
+   
   <servlet>
   <servlet-name>groupchat</servlet-name>
   <servlet-class>com.chatapp.chatlists.GroupChatListsServlet</servlet-class>
@@ -36,5 +40,13 @@
   <servlet-mapping>
   <servlet-name>groupchat</servlet-name>
   <url-pattern>/messages</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>groupchat</servlet-name>
+  <url-pattern>/friendsList</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>groupchat</servlet-name>
+  <url-pattern>/createGroup</url-pattern>
   </servlet-mapping>
 </web-app>

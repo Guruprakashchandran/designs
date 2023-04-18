@@ -24,8 +24,10 @@ public class PrivateChatListServlet extends HttpServlet{
 	/**
 	 * 
 	 */
+	private User user;
 	private static final long serialVersionUID = 1L;
-
+	private HttpServletRequest request = null;
+	private HttpServletResponse response = null;
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		
@@ -34,7 +36,7 @@ public class PrivateChatListServlet extends HttpServlet{
 			if(req.getServletPath().equals("/personalchat")) {
 				
 				HttpSession ses = req.getSession();
-				User user = (User) ses.getAttribute("user");
+				user = (User) ses.getAttribute("user");
 				personalChatController.getPersonalChats(user,req,res);
 			}
 			else if(req.getServletPath().equals("/message")) {
@@ -45,7 +47,7 @@ public class PrivateChatListServlet extends HttpServlet{
 					String msg = req.getParameter("message");
 //					System.out.println(personId+" "+msg);
 					HttpSession ses = req.getSession();
-					User user = (User) ses.getAttribute("user");
+					user = (User) ses.getAttribute("user");
 					personalChatController.addMessage(user, personId, msg, user.getId(), "NotViewed");
 				} catch (Exception e) {
 
@@ -55,6 +57,23 @@ public class PrivateChatListServlet extends HttpServlet{
 //					out.close();
 				}
 
+			}
+			else if(req.getServletPath().equals("/addFriend")) {
+				
+				try {
+					
+					String friendMobileNo = req.getParameter("friendNo");
+					request = req;
+					response = res;
+					personalChatController.addFriend(user, friendMobileNo);
+				}
+				catch(Exception e) {
+					
+					System.out.println("Wrong Data!!!");
+				}
+				res.setContentType("text/plain");
+				PrintWriter out = res.getWriter();
+				out.print("added");
 			}
 		}
 		catch(Exception e) {
@@ -124,6 +143,78 @@ public class PrivateChatListServlet extends HttpServlet{
 		}
 		finally {
 			 
+			out.close();
+		}
+	}
+
+	public void addedSuccessfully(User user) {
+		
+		PrintWriter out = null;
+		try {
+			
+			response.setContentType("text/plain");
+			out = response.getWriter();
+			out.print("Added");
+		}
+		catch(Exception e) {
+			
+			System.out.println("Didn't added!!!");
+		}
+		finally {
+			out.close();
+		}
+	}
+
+	public void addedFailed(User user) {
+		
+		PrintWriter out = null;
+		try {
+			
+			response.setContentType("text/plain");
+			out = response.getWriter();
+			out.print("Added Failed!!");
+		}
+		catch(Exception e) {
+			
+			System.out.println("Didn't added!!!");
+		}
+		finally {
+			out.close();
+		}
+	}
+
+	public void alreadyFriend(User user) {
+		
+		PrintWriter out = null;
+		try {
+			
+			response.setContentType("text/plain");
+			out = response.getWriter();
+			out.print("Already in Your Friend list");
+		}
+		catch(Exception e) {
+			
+			System.out.println("Didn't added!!!");
+		}
+		finally {
+			out.close();
+		}
+	}
+
+	public void friendNotInapp(User user) {
+		
+		PrintWriter out = null;
+		try {
+			
+			response.setContentType("text/plain");
+			out = response.getWriter();
+			out.print("Your Friend Not Registered in this app");
+		}
+		catch(Exception e) {
+			
+			System.out.println("Didn't added!!!");
+		}
+		finally {
 			out.close();
 		}
 	}

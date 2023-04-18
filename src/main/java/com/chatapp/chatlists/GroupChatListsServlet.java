@@ -25,7 +25,9 @@ public class GroupChatListsServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private User user;
 
+	@SuppressWarnings({ "unchecked", "null" })
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
@@ -33,8 +35,7 @@ public class GroupChatListsServlet extends HttpServlet {
 		if (req.getServletPath().equals("/groupchatlist")) {
 
 			HttpSession ses = req.getSession();
-			User user = (User) ses.getAttribute("user");
-//			System.out.println(user.getMobileNo());
+			user = (User) ses.getAttribute("user");
 			groupChatController.getGroupChatDetails(user, req, res);
 		} else if (req.getServletPath().equals("/messages")) {
 
@@ -44,18 +45,46 @@ public class GroupChatListsServlet extends HttpServlet {
 				String msg = req.getParameter("message");
 				System.out.println(groupId+" "+msg);
 				HttpSession ses = req.getSession();
-				User user = (User) ses.getAttribute("user");
+				user = (User) ses.getAttribute("user");
 				groupChatController.addMessage(user, user.getId(), msg, groupId, "NotViewed");
 			} catch (Exception e) {
 
 				System.out.println("Didn't Reached!!!");
-			} finally {
-
-//				out.close();
 			}
+		}
+		else if(req.getServletPath().equals("/friendsList")) {
+			
+			PrintWriter out = null;
+			try {
+			
+				Map<String,String> friendsList= groupChatController.getFriendsList(user);
+				JSONArray list = new JSONArray();
+				for(Map.Entry<String, String> entry : friendsList.entrySet()) {
+					
+					JSONObject obj = new JSONObject();
+					obj.put("mobileno", entry.getKey());
+					obj.put("friendName", entry.getValue());
+					list.add(obj);
+				}
+				out.print(list);
+			}
+			catch(Exception e) {
+				
+				System.out.println("Friends List Didn't get!!");
+			}
+			finally {
+				
+				out.close();
+			}
+		}
+		else if(req.getServletPath().equals("/createGroup")) {
+			
+			String frNames= req.getParameter("friendsNames");
+//			JSONArray friendsNames = new JSONArray(frNames);
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public void showDetails(List<List<Map<String, List<Messages>>>> data, User user, List<String> groupNames,
 			int[] friendsCount, List<List<Integer>> groupMembersCount, HttpServletRequest req,
 			HttpServletResponse res) {
@@ -66,8 +95,6 @@ public class GroupChatListsServlet extends HttpServlet {
 			out = res.getWriter();
 			res.setContentType("application/json");
 			JSONObject obj = new JSONObject();
-//			JSONObject obj1 = new JSONObject();
-//			System.out.println(obj1.put("guru",data).toString());
 			obj.put("groupNames", groupNames);
 			JSONArray jsonArray = new JSONArray();
 			JSONArray groupIds = new JSONArray();
@@ -82,7 +109,6 @@ public class GroupChatListsServlet extends HttpServlet {
 					for (Entry<String, List<Messages>> entry : data.get(i).get(j).entrySet()) {
 
 						JSONArray arr = new JSONArray();
-//						System.out.println("start---");
 						if (entry.getKey().startsWith("gc")) {
 
 							if (!groupIds.contains(entry.getKey())) {
@@ -97,18 +123,13 @@ public class GroupChatListsServlet extends HttpServlet {
 
 							JSONObject details = new JSONObject();
 
-//							System.out.println(entry.getValue().toString());
-//							System.out.println();
 							details.put("message", entry.getValue().get(l).getMessage());
 							details.put("status", entry.getValue().get(l).getStatus());
 							details.put("personId", entry.getValue().get(l).getPersonId());
 							details.put("mobileno", entry.getValue().get(l).getMobileNo());
-							details.put("date", entry.getValue().get(l).getDate().substring(0,19).toString());
+							details.put("date", entry.getValue().get(l).getDate().substring(0, 19).toString());
 							details.put("name", entry.getValue().get(l).getName());
-
 							arr.add(details);
-//							System.out.println(details);
-							// System.out.println(entry.getValue().get(l).getMessage());
 						}
 						if (arr.size() != 0) {
 
@@ -120,8 +141,6 @@ public class GroupChatListsServlet extends HttpServlet {
 				}
 				jsonArray.add(jsonArr);
 			}
-//			System.out.println(jsonArray.toJSONString());
-//			System.out.println(groupIds.toJSONString());
 			obj.put("messages", jsonArray);
 			obj.put("groupIds", groupIds);
 			obj.put("userId", userId);

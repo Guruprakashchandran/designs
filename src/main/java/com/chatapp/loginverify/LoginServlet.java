@@ -30,15 +30,6 @@ public class LoginServlet extends HttpServlet {
 		LoginOrRegisterPageController controller = new LoginOrRegisterPageController(this);
 		User user = new User(null, mobileNumber, null, 0, null, password, null, null);
 		controller.checkLogin(user, res, req);
-//		super.service(req, res);
-//		System.out.println(mobileNumber+" "+password);
-//		res.setContentType("application/json");
-//		System.out.println("reach");
-//		json.put("message", "Loginsuccess");
-//		System.out.println(json.get("message"));
-//		out.print(json.toString());
-//		out.write(mobileNumber);
-//		out.close();
 	}
 
 	public void loginFailed(String msg, HttpServletResponse res) {

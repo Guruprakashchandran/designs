@@ -41,11 +41,11 @@ public class GroupChatController implements GroupChatModelToControllerCall{
 		groupChatControllerToModelCall.addMessage(user,id,msg,groupId,status);
 	}
 //	@Override
-//	public Map<String,String> getFriendsList(User user) {
-//		
-//		Map<String,String> friendList = groupChatControllerToModelCall.getFriendsList(user);
-//		return friendList;
-//	}
+	public Map<String,String> getFriendsList(User user) {
+		
+		Map<String,String> friendList = groupChatControllerToModelCall.getFriendsList(user);
+		return friendList;
+	}
 	@Override
 	public void friendsList(Map<String,String> friendsList) {
 		

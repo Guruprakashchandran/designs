@@ -22,30 +22,30 @@ public class PersonalChatController implements PersonalChatModelToControllerCall
 		personalChatControllerToModelCall = new PersonalChatModel(this);
 	}
 //	@Override
-//	public void addFriend(User user, String newNumber) {
-//		
-//		personalChatControllerToModelCall.addFriend(user,newNumber);
-//	}
-//	@Override
-//	public void friendNotInapp(User user) {
-//		
-//		personalChatControllerToViewCall.friendNotInapp(user);
-//	}
-//	@Override
-//	public void alreadyFriend(User user) {
-//		
-//		personalChatControllerToViewCall.alreadyFriend(user);
-//	}
-//	@Override
-//	public void addedFailed(User user) {
-//		
-//		personalChatControllerToViewCall.addedFailed(user);
-//	}
-//	@Override
-//	public void addedSuccessfully(User user) {
-//		
-//		personalChatControllerToViewCall.addedSuccessfully(user);
-//	}
+	public void addFriend(User user, String newNumber) {
+		
+		personalChatControllerToModelCall.addFriend(user,newNumber);
+	}
+	@Override
+	public void friendNotInapp(User user) {
+		
+		privateChatListServlet.friendNotInapp(user);
+	}
+	@Override
+	public void alreadyFriend(User user) {
+		
+		privateChatListServlet.alreadyFriend(user);
+	}
+	@Override
+	public void addedFailed(User user) {
+		
+		privateChatListServlet.addedFailed(user);
+	}
+	@Override
+	public void addedSuccessfully(User user) {
+		
+		privateChatListServlet.addedSuccessfully(user);
+	}
 //	@Override
 	public void getPersonalChats(User user, HttpServletRequest req, HttpServletResponse res) {
 
@@ -77,29 +77,34 @@ public class PersonalChatController implements PersonalChatModelToControllerCall
 //		
 //		personalChatControllerToModelCall.closeConnection();
 //	}
-	@Override
-	public void friendNotInapp(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void alreadyFriend(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void addedFailed(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void addedSuccessfully(User user) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void msgAddedFailed(String mobileNo) {
-		// TODO Auto-generated method stub
-		
-	}
+//	@Override
+//	public void friendNotInapp(User user) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public void alreadyFriend(User user) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public void addedFailed(User user) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public void addedSuccessfully(User user) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+//	@Override
+//	public void msgAddedFailed(String mobileNo) {
+//		// TODO Auto-generated method stub
+//		
+//	}
+@Override
+public void msgAddedFailed(String mobileNo) {
+	// TODO Auto-generated method stub
+	
+}
 }

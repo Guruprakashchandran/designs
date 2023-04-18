@@ -21,7 +21,7 @@
   width: 27%;
   height: 33%;
   margin: auto;
-  background-color: #3e4e53;
+  background-color: #cac7c7;
   z-index: 0;
 }
 .headerEmptySpace {
@@ -43,8 +43,9 @@
   margin-right: 2em;
   box-shadow: 4px 4px 5px rgb(32, 57, 77);
   height: auto;
-  max-width: 300px;
+  max-width: 600px;
   min-width: 20px;
+  word-wrap: break-word;
   color: white;
   background-color: steelblue;
   padding: 15px;
@@ -68,6 +69,8 @@
   text-align: left;
   float: left;
   clear: both;
+  max-width: 600px;
+  min-width: 20px;
   margin-bottom: 35px;
   border-radius: 15px 15px 15px 0;
   padding: 15px;
@@ -179,7 +182,7 @@ input[type="number"]::-webkit-outer-spin-button {
   padding-left: 20px;
   height: 25px;
   width: 100px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 2px solid black;
 }
 .userDobDesign {
@@ -206,7 +209,7 @@ input[type="number"]::-webkit-outer-spin-button {
   float: right;
   display: inline-block;
   top: 0;
-  width: 9.7%;
+  width: 5%;
   height: 100%;
   background-color: #3e4e53;
 }
@@ -228,6 +231,11 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 100%;
   background-color: #3e4e53;
 }
+.searchicon {
+  font-size: 15px;
+  top: 15px;
+  right: 81px;
+}
 .friendMobileNoDiv {
   margin-left: 15px;
   margin-right: 15px;
@@ -236,26 +244,26 @@ input[type="number"]::-webkit-outer-spin-button {
 .userSearchDiv {
   display: flex;
   margin-top: 1px;
-  height: 7%;
-  background-color: #3e4e53;
+  height: 9%;
+  background-color: white;
   position: sticky;
+  /* position: absolute; */
   top: 0;
 }
 #Groupplusicon {
   margin: 10px 10px;
   font-size: 28px;
-  color: #b3b3b3;
+  color: black;
 }
 #plusicon {
   margin: 10px 10px;
   font-size: 28px;
-  color: #b3b3b3;
+  color: black;
 }
 .userSearch::placeholder {
   color: rgb(204, 204, 204);
 }
 .userSearch {
-  box-shadow: -0.5px 0.5px 7px black;
   margin-top: 6px;
   display: flex;
   outline: none;
@@ -268,7 +276,7 @@ input[type="number"]::-webkit-outer-spin-button {
   font-size: 18px;
   border-radius: 10px;
   width: 70%;
-  height: 85%;
+  height: 75%;
 }
 .usericon {
   padding-top: 600%;
@@ -299,7 +307,7 @@ body {
 }
 .messageHeader {
   height: 10%;
-  width: 72.8%;
+  width: 73.8%;
   border: 2px solid black;
   border-radius: 5px;
   position: fixed;
@@ -307,7 +315,7 @@ body {
   background-color: rgb(231, 226, 226);
 }
 .messages {
-  background-color: #3e4e53;
+  background-color: #cac7c7;
   height: 79%;
   width: 100%;
   margin-top: 68px;
@@ -329,40 +337,53 @@ body {
   position: sticky;
   top: 0;
 }
+.noFriend {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
 .searchBar {
   position: fixed;
   width: 100%;
   bottom: 0;
   height: 6%;
-  background-color: #3e4e53;
+  background-color: #cac7c7;
 }
 .bodyContainer {
   display: flex;
   height: calc(100% - 60px);
 }
+.searchicon {
+  position: relative;
+}
 ::-webkit-scrollbar {
   display: none;
 }
 .chatCategory {
-  background-color: lightblue;
+  background-color: white;
   width: 7%;
   height: 100%;
-  border-right: 2px solid white;
+  position: sticky;
+  border-right: 2px solid #d8d5d5;
 }
 .chatList {
   width: 20%;
   min-height: auto;
   overflow-y: auto;
-  background-color: #3e4e53;
-  border-right: 0.5px solid white;
+  background-color: white;
+  border-right: 0.5px solid #d8d5d5;
 }
 .privateChat {
+  margin: 2px 1px 2px 2px;
   display: flex;
-  height: 50%;
+  height: 49%;
+  border: 1px solid #cac7c7;
 }
 .groupChat {
+  margin: 2px 1px 2px 2px;
   display: flex;
-  height: 50%;
+  height: 49%;
+  border: 1px solid #cac7c7;
 }
 .no_contacts_Container {
   text-align: center;
@@ -370,7 +391,7 @@ body {
 }
 .contact:hover {
   color: black;
-  background-color: rgb(211, 208, 208);
+  /* background-color: rgb(211, 208, 208); */
   box-shadow: 0.5px 2px 10px black;
 }
 .nocontacts {
@@ -379,46 +400,94 @@ body {
   font-style: italic;
   font-family: Impact, Haettenschweiler, sans-serif;
 }
+.friendId {
+  font-weight: bold;
+  height: 40px;
+  margin: 0px 2px 1px 2px;
+  border: 1px solid black;
+  font-size: 20px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+.friendsAddButtonDiv {
+  height: 50px;
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  font-weight: bold;
+  background-color: white;
+}
+.friendsAddButton {
+  height: 60%;
+  margin-top: 5%;
+  margin-left: 6%;
+  width: 30%;
+  position: sticky;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+}
+
+.friendsListbackgroundDiv {
+  height: auto;
+  /* overflow: auto; */
+  top: 50px;
+  width: 100%;
+}
+.friend {
+  height: 40px;
+  margin: 2px 2px 1px 2px;
+  border: 1px solid black;
+  font-size: 20px;
+  background-color: white;
+}
 .CenterDiv {
-  min-width: 285px;
-  display: none;
+  border-radius: 0px;
+  min-width: 200px;
+  /* display: none; */
+  display: block;
   min-height: 150px;
-  max-height: 400px;
+  max-height: 300px;
   background-color: white;
   /* padding: 500px; */
   position: absolute;
   text-align: center;
   left: 41%;
   top: 41%;
+  overflow: auto;
   /* margin-top: 25%; */
   /* margin-left: 41%; */
-  border-radius: 15px;
+  /* border-radius: 15px; */
   z-index: 1;
 }
 .contact {
   padding-top: 13px;
-  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  /* font-family: "Dongle", sans-serif;
+  font-family: "DynaPuff", cursive; */
+  /* font-family: "Times New Roman", Times, serif; */
   /* font-family: "DynaPuff", cursive; */
   height: 8.25%;
-  color: white;
+  color: #3e4e53;
   font-size: 20px;
-  background-color: #3e4e53;
+  margin: 2px;
+  border: 1px solid #cac7c7;
+  background-color: white;
 }
 .profileImage {
   padding-top: 9px;
-  padding-left: 70px;
   width: 40px;
   height: 40px;
 }
 .nameContainer {
-  margin-left: 60px;
   font-size: 25px;
-  font-family: "Times New Roman", Times, serif;
+  font-family: "PT Sans Caption", sans-serif;
 }
 .messagesList {
   height: 100%;
-  width: 73%;
+  width: 78%;
   display: flex;
   flex-direction: column;
-  background-color: #3e4e53;
+  background-color: #cac7c7;
 }

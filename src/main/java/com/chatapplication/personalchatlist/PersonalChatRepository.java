@@ -65,7 +65,7 @@ public class PersonalChatRepository{
 
 //			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/task1", "root", "root");
 			st = connection.createStatement();
-			System.out.println("reacheddddd");
+//			System.out.println("reacheddddd");
 			result = st.executeQuery("select * from personalchat where person1mobileno ='" + user.getMobileNo()
 					+ "' or person2mobileno = '" + user.getMobileNo() + "'");
 			List<List<Map<String, List<Message>>>> data = new LinkedList<>();
