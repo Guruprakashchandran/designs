@@ -146,12 +146,13 @@
   border-radius: 5px;
   width: 74px;
   height: 36px;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: bold;
+  font-family: "Bebas Neue", cursive;
 }
 
 .addFriendButton:hover {
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .addFriendButtonDiv {
@@ -176,11 +177,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 .friendNolabel {
   font-size: 20px;
+  font-family: "Bebas Neue", cursive;
 }
 
 .friendno {
   padding-left: 20px;
   height: 25px;
+  font-family: "Bebas Neue", cursive;
   width: 100px;
   border-radius: 8px;
   border: 2px solid black;
@@ -436,6 +439,7 @@ body {
   width: 100%;
 }
 .friend {
+  font-family: "Nunito", sans-serif;
   height: 40px;
   margin: 2px 2px 1px 2px;
   border: 1px solid black;
@@ -444,7 +448,7 @@ body {
 }
 .CenterDiv {
   border-radius: 0px;
-  min-width: 200px;
+  min-width: 250px;
   /* display: none; */
   display: block;
   min-height: 150px;
@@ -453,8 +457,8 @@ body {
   /* padding: 500px; */
   position: absolute;
   text-align: center;
-  left: 41%;
-  top: 41%;
+  left: 46%;
+  top: 40%;
   overflow: auto;
   /* margin-top: 25%; */
   /* margin-left: 41%; */

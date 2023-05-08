@@ -1,10 +1,13 @@
 package com.chatapp.chatlists;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,6 +60,7 @@ public class GroupChatListsServlet extends HttpServlet {
 			PrintWriter out = null;
 			try {
 			
+				out = res.getWriter();
 				Map<String,String> friendsList= groupChatController.getFriendsList(user);
 				JSONArray list = new JSONArray();
 				for(Map.Entry<String, String> entry : friendsList.entrySet()) {
@@ -77,10 +81,81 @@ public class GroupChatListsServlet extends HttpServlet {
 				out.close();
 			}
 		}
-		else if(req.getServletPath().equals("/createGroup")) {
+		else if(req.getServletPath().equals("/newFriendsList")) {
 			
-			String frNames= req.getParameter("friendsNames");
-//			JSONArray friendsNames = new JSONArray(frNames);
+			PrintWriter out = null;
+			try {
+				
+				out = res.getWriter();
+				Map<String,String> friendsList = groupChatController.getFriendsList(user);
+				JSONObject friendsListPocket =  new JSONObject();
+				JSONArray details = new JSONArray();
+				for(Entry<String,String> entry : friendsList.entrySet()) {
+					
+					JSONObject friend =  new JSONObject();
+					friend.put("friendName", entry.getValue());
+					friend.put("friendNumber", entry.getKey());
+					details.add(friend);
+				}
+				friendsListPocket.put("friendsDetails", details);
+				out.print(friendsListPocket);
+
+			} catch (Exception e) {
+
+				System.out.println("Didn't get Friends List!!!");
+			}
+			finally {
+				
+				out.close();
+			}
+		}
+		else if(req.getServletPath().equals("/createGroup")) {
+		
+			PrintWriter out = null;
+			
+			try {
+				
+				out = res.getWriter();
+				String groupName = req.getParameter("groupName");
+				
+				String friendsIdString= req.getParameter("friendsIds");
+				String[] remOpenBracketinFriendsIds = friendsIdString.split("\\[");
+				String[] remCloseBracketinFriendsIds = remOpenBracketinFriendsIds[1].split("\\]");
+				String[] friendsIds = remCloseBracketinFriendsIds[0].split(",");
+				System.out.println(Arrays.toString(friendsIds));
+				
+				String friendsNamesString = req.getParameter("friendsNames");
+				String[] remOpenBracketinFriendsNames = friendsNamesString.split("\\[");
+				String[] remCloseBracketinFriendsNames = remOpenBracketinFriendsNames[1].split("\\]");
+				String[] friendsNames = remCloseBracketinFriendsNames[0].split(",");
+				System.out.println(Arrays.toString(friendsNames));
+				
+				String friendsListMobileNo= req.getParameter("friendsMobileNo");
+				String[] remOpenBracketinFriendsMobileNo = friendsListMobileNo.split("\\[");
+				String[] remCloseBracketinFriendsMobileNo = remOpenBracketinFriendsMobileNo[1].split("\\]");
+				String[] friendsMobileNo = remCloseBracketinFriendsMobileNo[0].split(",");
+				
+				List<String> mobileNoList = new LinkedList<>();
+				System.out.println(Arrays.toString(friendsMobileNo));
+				System.out.println(Arrays.toString(friendsIds));
+				for(int i = 0;i < friendsIds.length;++i) {
+
+//					System.out.println();
+					mobileNoList.add(friendsMobileNo[Integer.parseInt(friendsIds[i])]);
+				}
+				
+				System.out.println(mobileNoList.toString());
+				groupChatController.createGroup(mobileNoList, groupName, user);
+				out.print("group Created Successfully!!!");
+			} catch (Exception e) {
+
+				e.printStackTrace();
+				System.out.println("Wrong Id and Name Selected!!!");
+			}
+			finally {
+				
+				out.close();
+			}
 		}
 	}
 

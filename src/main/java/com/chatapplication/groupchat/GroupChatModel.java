@@ -50,13 +50,13 @@ public class GroupChatModel implements GroupChatControllerToModelCall {
 	public void createGroup(List<String> mobileNoList, String grpName, User user) {
 
 		int notFriendsCount = GroupChatRepository.getInstance().createGroup(user, grpName, mobileNoList);
-		if (notFriendsCount == 0) {
+//		if (notFriendsCount == 0) {
 
-			groupChatModelToControllerCall.friendsAdded(user);
-		} else {
+//			groupChatModelToControllerCall.friendsAdded(user);
+//		} else {
 
-			groupChatModelToControllerCall.notAddedFriends(notFriendsCount, user);
-		}
+//			groupChatModelToControllerCall.notAddedFriends(notFriendsCount, user);
+//		}
 	}
 
 	@Override

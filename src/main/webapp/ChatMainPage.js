@@ -12,6 +12,10 @@ var isPrivateChatFirstEntry = true,
   isGroupChatFirstEntry = true;
 var friendsList = [];
 var personalmsg = true;
+var friendIds = [];
+var friendsNameList = [];
+var friendsMobileNoList = [];
+var list;
 
 function messagesList() {
   document.querySelector(".profileViewDiv").style = "display: none";
@@ -377,7 +381,6 @@ function showGroupMessages(i) {
   groupChatclickid = i;
   let person1msg = 0,
     person2msg = 0;
-  S;
   let displayed = true;
   while (
     userdetail != null &&
@@ -537,21 +540,39 @@ function addGroup() {
 var groupname;
 function createGroup() {
   groupname = document.getElementById("groupName").value;
-  if (groupname.length != null) {
-    showFriends();
+  if (groupname.length != 0) {
+    getFriendsList();
     // document.getElementById("centerContentDiv").style = "display:none;";
   } else {
     alert("Plss!! Enter Group Name");
   }
 }
+
+function getFriendsList() {
+  let xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && this.status == 200) {
+      let pocket = JSON.parse(this.responseText);
+      list = pocket.friendsDetails;
+      console.log(list.length);
+      showFriends();
+    }
+  };
+  xhr.open("post", "http://localhost:8085/ChatApp/newFriendsList", true);
+  xhr.send();
+}
+
 function showFriends() {
   let friends = "";
-  if (names != null) {
+  console.log(list);
+  if (list.length > 0) {
     friendIds = [];
     friends += '<div class="friendId">Friends</div>';
     friends += "<div class = friendsListbackgroundDiv>";
-    for (let i = 0; i < names.length; ++i) {
-      friends += `<div class="friend" id = "${i}"onclick = "friendIdClick(${i})">${names[i]}</div>`;
+    for (let i = 0; i < list.length; ++i) {
+      friends += `<div class="friend" id = "${i}"onclick = "friendIdClick(${i})">${list[i].friendName}</div>`;
+      friendsNameList.push(list[i].friendName);
+      friendsMobileNoList.push(list[i].friendNumber);
     }
     friends += "</div>";
     friends +=
@@ -563,7 +584,6 @@ function showFriends() {
   }
 }
 
-var friendIds = [];
 function friendIdClick(i) {
   if (!friendIds.includes(i)) {
     friendIds.push(i);
@@ -576,22 +596,30 @@ function friendIdClick(i) {
 
 function addFriendsToGroup() {
   let friendIdList = JSON.stringify(friendIds);
-  let friendsNames = JSON.stringify(names);
-  console.log(friendIds);
+  let friendsNames = JSON.stringify(friendsNameList);
+  let friendsMobileNos = JSON.stringify(friendsMobileNoList);
+  // console.log(friendsNames);
+  // console.log(friendsMobileNoList);
   let xhr = new XMLHttpRequest();
-  // xhr.onreadystatechange = function () {
-  //   if (xhr.readyState == 4 && this.response == 200) {
-  //     // console.lo
-  //   }
-  // };
-  xhr.open("post", "", true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4 && this.status == 200) {
+      document.getElementById("centerContentDiv").style = "display:none";
+      alert(this.responseText);
+      isGroupChatFirstEntry = true;
+      showgroupnames = true;
+      groupchatclick();
+    }
+  };
+  xhr.open("post", "http://localhost:8085/ChatApp/createGroup", true);
   xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
   xhr.send(
     "groupName=" +
       groupname +
-      "&friendslist=" +
-      encodeURIComponent(friendIdList) +
-      "&friendsIds" +
-      encodeURIComponent(friendsNames)
+      "&friendsIds=" +
+      friendIdList +
+      "&friendsNames=" +
+      friendsNames +
+      "&friendsMobileNo=" +
+      friendsMobileNos
   );
 }

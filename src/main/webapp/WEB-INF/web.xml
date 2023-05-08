@@ -49,4 +49,9 @@
   <servlet-name>groupchat</servlet-name>
   <url-pattern>/createGroup</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+  <servlet-name>groupchat</servlet-name>
+  <url-pattern>/newFriendsList</url-pattern>
+  
+  </servlet-mapping>
 </web-app>

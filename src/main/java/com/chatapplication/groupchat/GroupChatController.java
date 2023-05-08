@@ -57,10 +57,10 @@ public class GroupChatController implements GroupChatModelToControllerCall{
 		groupChatControllerToViewCall.noFreinds();
 	}
 //	@Override
-//	public void createGroup(List<String> mobileNoList, String grpName, User user) {
-//		
-//		groupChatControllerToModelCall.createGroup(mobileNoList,grpName,user);
-//	}
+	public void createGroup(List<String> mobileNoList, String grpName, User user) {
+		
+		groupChatControllerToModelCall.createGroup(mobileNoList,grpName,user);
+	}
 	@Override
 	public void notAddedFriends(int notFriendsCount, User user) {
 		
